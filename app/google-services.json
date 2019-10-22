@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "791345438587",
+    "firebase_url": "https://pi-informa.firebaseio.com",
+    "project_id": "pi-informa",
+    "storage_bucket": "pi-informa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:791345438587:android:4d467ac0d6dc435f32e7de",
+        "android_client_info": {
+          "package_name": "com.example.daniel.pi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "791345438587-vg62mqrbgneg15gp6l0q5i70koqo70it.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.daniel.pi",
+            "certificate_hash": "3e4bae4050dcaf55bf7b55c6e8d15b6fd61e955b"
+          }
+        },
+        {
+          "client_id": "791345438587-qa25hc96mnht9jtp3rbj2mtoib0qdgkh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDRCba4J80oZz2DV6BUgIxqWV5O1eYkCPk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "791345438587-qa25hc96mnht9jtp3rbj2mtoib0qdgkh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
