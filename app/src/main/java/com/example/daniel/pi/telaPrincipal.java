@@ -156,7 +156,7 @@ public class telaPrincipal extends AppCompatActivity
 
     public void sair(MenuItem item) {
         firebaseAuth.signOut();
-        Intent i = new Intent(this, MainActivity.class);
+        Intent i = new Intent(this, telaLogin.class);
         startActivity(i);
     }
 }

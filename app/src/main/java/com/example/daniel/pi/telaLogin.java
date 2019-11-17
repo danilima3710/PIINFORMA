@@ -1,34 +1,31 @@
 package com.example.daniel.pi;
 
-import android.R;
-import android.content.Intent;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class MainActivity extends AppCompatActivity {
+public class telaLogin extends AppCompatActivity {
+
     FirebaseAuth firebaseAuth;
 
     String login;
     String senha;
     FirebaseDatabase database;
     DatabaseReference databaseReference;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_main);
-
+        setContentView(R.layout.activity_tela_login);
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseAuth.createUserWithEmailAndPassword("teste@teste.com", "1234mudar");
 
@@ -39,10 +36,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void entrar(View view) {
-//        final EditText l = (EditText) findViewById(R.id.login);
-//        final EditText s = (EditText) findViewById(R.id.senha);
-//        login = l.getText().toString();
-//        senha = s.getText().toString();
+        final EditText l = (EditText) findViewById(R.id.login);
+        final EditText s = (EditText) findViewById(R.id.senha);
+        login = l.getText().toString();
+        senha = s.getText().toString();
 
         if (!login.isEmpty() && !senha.isEmpty()){
             firebaseAuth.signInWithEmailAndPassword(login, senha);
@@ -55,26 +52,21 @@ public class MainActivity extends AppCompatActivity {
                 toast.show();
             }
         }else {
-           if (login.isEmpty() && !senha.isEmpty()){
+            if (login.isEmpty() && !senha.isEmpty()){
                 Toast toast = Toast.makeText(getApplicationContext(), "Login está vazio", Toast.LENGTH_LONG);
                 toast.show();
             }else{
-               if (!login.isEmpty() && senha.isEmpty()){
-                   Toast toast = Toast.makeText(getApplicationContext(), "Senha está vazia", Toast.LENGTH_LONG);
-                   toast.show();
-               }else{
-                   if (login.isEmpty() && senha.isEmpty()){
-                       Toast toast = Toast.makeText(getApplicationContext(), "Favor inserir o login e a senha", Toast.LENGTH_LONG);
-                       toast.show();
-                   }
-               }
-           }
+                if (!login.isEmpty() && senha.isEmpty()){
+                    Toast toast = Toast.makeText(getApplicationContext(), "Senha está vazia", Toast.LENGTH_LONG);
+                    toast.show();
+                }else{
+                    if (login.isEmpty() && senha.isEmpty()){
+                        Toast toast = Toast.makeText(getApplicationContext(), "Favor inserir o login e a senha", Toast.LENGTH_LONG);
+                        toast.show();
+                    }
+                }
+            }
         }
-    }
-
-    public void deslogar(View view) {
-        firebaseAuth.signOut();
-
     }
 
     public void criarConta(View view) {
