@@ -8,4 +8,12 @@
     tools:context=".telaPrincipal"
     tools:showIn="@layout/app_bar_tela_principal">
 
+    <ListView
+        android:id="@+id/listView"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

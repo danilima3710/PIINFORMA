@@ -6,6 +6,17 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import android.view.View;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import androidx.annotation.NonNull;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -13,9 +24,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import java.util.ArrayList;
 
 public class telaPrincipal extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    FirebaseAuth firebaseAuth;
+    DatabaseReference databaseReference;
+    FirebaseDatabase database;
+    StorageReference storageReference;
+    ListView listView;
+    Artigo objetoArtigo = new Artigo();
+    ArrayList<Artigo> listaArtigo = new ArrayList<Artigo>();
+    ArrayAdapter<Artigo> listaAdapterArtigo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,15 +46,10 @@ public class telaPrincipal extends AppCompatActivity
         setContentView(R.layout.activity_tela_principal);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        listView = findViewById(R.id.listView);
+        iniciaFireBase();
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -41,6 +59,37 @@ public class telaPrincipal extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        eventoDataBase();
+    }
+
+    private void iniciaFireBase() {
+        firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseApp.initializeApp(telaPrincipal.this);
+        database = FirebaseDatabase.getInstance();
+        database.setPersistenceEnabled(true);
+        databaseReference = database.getReference();
+        storageReference = FirebaseStorage.getInstance().getReference("image_upload"); //Firebase Storage
+    }
+
+    private void eventoDataBase() {
+        databaseReference.child("Artigo").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                listaArtigo.clear();
+                for (DataSnapshot objSnapshot: dataSnapshot.getChildren()){
+                    Artigo artigo = objSnapshot.getValue(Artigo.class);
+                    listaArtigo.add(artigo);
+                }
+                listaAdapterArtigo = new ArrayAdapter<Artigo>(telaPrincipal.this, android.R.layout.simple_list_item_1, listaArtigo);
+                listView.setAdapter(listaAdapterArtigo);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     @Override
@@ -101,7 +150,13 @@ public class telaPrincipal extends AppCompatActivity
     }
 
     public void cadastrar(MenuItem item) {
-        Intent i = new Intent(this, cadastrar.class);
+        Intent i = new Intent(this, ArtigoCadastrarActivity.class);
+        startActivity(i);
+    }
+
+    public void sair(MenuItem item) {
+        firebaseAuth.signOut();
+        Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
     }
 }

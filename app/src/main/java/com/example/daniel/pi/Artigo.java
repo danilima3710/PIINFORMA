@@ -1,11 +1,38 @@
 package com.example.daniel.pi;
 
-public class artigo {
+import android.content.Intent;
+
+public class Artigo {
+    String id_artigo;
     String titulo;
     String descricao;
     String categoria;
     String publico;
     String tipoArtigo;
+    String url;
+
+    public String getId_artigo() {
+        return id_artigo;
+    }
+
+    public void setId_artigo(String id_artigo) {
+        this.id_artigo = id_artigo;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public void setTitulo() {
+        this.titulo = titulo;
+    }
+
+
+
 
     public String getTitulo() {
         return titulo;
@@ -46,4 +73,20 @@ public class artigo {
     public void setTipoArtigo(String tipoArtigo) {
         this.tipoArtigo = tipoArtigo;
     }
+
+    @Override
+    public String toString() {
+        return "Artigo{" +
+                "id_artigo=" + id_artigo +
+                ", titulo='" + titulo + '\'' +
+                ", descricao='" + descricao + '\'' +
+                ", categoria='" + categoria + '\'' +
+                ", publico='" + publico + '\'' +
+                ", tipoArtigo='" + tipoArtigo + '\'' +
+                ", url='" + url + '\'' +
+                '}';
+    }
+
+
+
 }

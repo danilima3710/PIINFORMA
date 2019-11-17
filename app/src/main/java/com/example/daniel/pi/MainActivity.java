@@ -1,19 +1,24 @@
 package com.example.daniel.pi;
 
+import android.R;
 import android.content.Intent;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
+    FirebaseAuth firebaseAuth;
 
     String login;
     String senha;
@@ -22,16 +27,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+//        setContentView(R.layout.activity_main);
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseAuth.createUserWithEmailAndPassword("teste@teste.com", "1234mudar");
+
+
 
         database = FirebaseDatabase.getInstance();
         databaseReference = database.getReference();
-        databaseReference.child("Teste").setValue("rati").addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.i("Erro", e.getMessage());
-            }
-        });
     }
 
     public void entrar(View view) {
@@ -40,14 +44,41 @@ public class MainActivity extends AppCompatActivity {
         login = l.getText().toString();
         senha = s.getText().toString();
 
-        if (login.equals("vilson.l") && (senha.equals("1234"))){
-            Intent i = new Intent(this, telaPrincipal.class);
-            startActivity(i);
+        if (!login.isEmpty() && !senha.isEmpty()){
+            firebaseAuth.signInWithEmailAndPassword(login, senha);
+            FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+            if (firebaseUser != null){
+                Intent i = new Intent(this, telaPrincipal.class);
+                startActivity(i);
+            } else{
+                Toast toast = Toast.makeText(getApplicationContext(), "Login ou Senha Incorreto(s)", Toast.LENGTH_LONG);
+                toast.show();
+            }
         }else {
-
-            Toast toast = Toast.makeText(getApplicationContext(), "Login ou Senha Incorreto(s)", Toast.LENGTH_LONG);
-            toast.show();
-
+           if (login.isEmpty() && !senha.isEmpty()){
+                Toast toast = Toast.makeText(getApplicationContext(), "Login está vazio", Toast.LENGTH_LONG);
+                toast.show();
+            }else{
+               if (!login.isEmpty() && senha.isEmpty()){
+                   Toast toast = Toast.makeText(getApplicationContext(), "Senha está vazia", Toast.LENGTH_LONG);
+                   toast.show();
+               }else{
+                   if (login.isEmpty() && senha.isEmpty()){
+                       Toast toast = Toast.makeText(getApplicationContext(), "Favor inserir o login e a senha", Toast.LENGTH_LONG);
+                       toast.show();
+                   }
+               }
+           }
         }
+    }
+
+    public void deslogar(View view) {
+        firebaseAuth.signOut();
+
+    }
+
+    public void criarConta(View view) {
+        Intent i = new Intent(this, criarConta.class);
+        startActivity(i);
     }
 }
