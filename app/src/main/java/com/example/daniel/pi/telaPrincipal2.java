@@ -75,7 +75,7 @@ public class telaPrincipal2 extends AppCompatActivity
     }
 
     private void eventoDataBase() {
-
+        this.listView= findViewById(R.id.listView);
         databaseReference.child("Artigo").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
