@@ -2,9 +2,12 @@ package com.example.daniel.pi;
 
 import android.content.Intent;
 import android.os.Bundle;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+
 import android.view.View;
+
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
@@ -13,8 +16,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 import androidx.annotation.NonNull;
 import androidx.core.view.GravityCompat;
@@ -22,45 +23,43 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class telaPrincipal extends AppCompatActivity
+public class telaPrincipal2 extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    FirebaseAuth firebaseAuth;
-    DatabaseReference databaseReference;
-    FirebaseDatabase database;
-    StorageReference storageReference;
-    ListView listView;
-    Artigo objetoArtigo = new Artigo();
-    Artigo artigoSelecionado = new Artigo();
-    ArrayList<Artigo> listaArtigo = new ArrayList<Artigo>();
-    ArrayAdapter<Artigo> listaAdapterArtigo;
-    String titulo;
-    String descricao;
-    String url;
-    String id;
-    String categoria;
-    String publico;
 
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
+    FirebaseAuth firebaseAuth;
+    ListView listView;
+    Artigo artigoSelecionado = new Artigo();
+    EditText titulo;
+    EditText descricao;
+    String categoria;
+    EditText tipoArtigo;
+    EditText url;
+    EditText id;
+    EditText publico;
+
+    private ArrayList<Artigo> listaArtigo = new ArrayList<Artigo>();
+    private ArrayAdapter<Artigo> listaAdapterPessoa;
+    private DataSnapshot artigosSnapshot;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tela_principal);
+        setContentView(R.layout.activity_tela_principal2);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        listView = findViewById(R.id.listView);
-        iniciaFireBase();
-
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -71,36 +70,44 @@ public class telaPrincipal extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        iniciaFireBase();
         eventoDataBase();
     }
 
-    private void iniciaFireBase() {
-        firebaseAuth = FirebaseAuth.getInstance();
-        FirebaseApp.initializeApp(telaPrincipal.this);
-        database = FirebaseDatabase.getInstance();
-        database.setPersistenceEnabled(true);
-        databaseReference = database.getReference();
-        storageReference = FirebaseStorage.getInstance().getReference("image_upload"); //Firebase Storage
-    }
-
     private void eventoDataBase() {
+
         databaseReference.child("Artigo").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 listaArtigo.clear();
-                for (DataSnapshot objSnapshot: dataSnapshot.getChildren()){
+                for (DataSnapshot objSnapshot:dataSnapshot.getChildren()){
                     Artigo artigo = objSnapshot.getValue(Artigo.class);
                     listaArtigo.add(artigo);
                 }
-                listaAdapterArtigo = new ArrayAdapter<Artigo>(telaPrincipal.this, android.R.layout.simple_list_item_1, listaArtigo);
-                listView.setAdapter(listaAdapterArtigo);
+
+//                artigoAdapter adapter = new artigoAdapter(
+//                        getApplicationContext(), R.layout.list_item_artigo,listaArtigo
+//                );
+
+                listaAdapterPessoa = new ArrayAdapter<Artigo>(telaPrincipal2.this, android.R.layout.simple_list_item_1, listaArtigo);
+                listView.setAdapter(listaAdapterPessoa);
             }
+
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
+
+
+    }
+
+    private void iniciaFireBase() {
+        FirebaseApp.initializeApp(telaPrincipal2.this);
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference();
+        firebaseAuth = FirebaseAuth.getInstance();
     }
 
     @Override
@@ -116,7 +123,7 @@ public class telaPrincipal extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.tela_principal, menu);
+        getMenuInflater().inflate(R.menu.tela_principal2, menu);
         return true;
     }
 
@@ -168,26 +175,6 @@ public class telaPrincipal extends AppCompatActivity
     public void sair(MenuItem item) {
         firebaseAuth.signOut();
         Intent i = new Intent(this, telaLogin.class);
-        startActivity(i);
-    }
-
-    public void selecionar(View view) {
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                itemSelecionado item = new itemSelecionado();
-                artigoSelecionado = (Artigo)parent.getItemAtPosition(position);
-                item.setTitulo(artigoSelecionado.getTitulo());
-                item.setDescricao(artigoSelecionado.getDescricao());
-                item.setCategoria(artigoSelecionado.getCategoria());
-                item.setPublico(artigoSelecionado.getPublico());
-                item.setUrl(artigoSelecionado.getUrl());
-                item.setId(artigoSelecionado.getId_artigo());
-
-            }
-        });
-
-        Intent i = new Intent(this, itemSelecionado.class);
         startActivity(i);
     }
 }

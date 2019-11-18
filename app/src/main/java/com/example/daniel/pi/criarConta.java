@@ -81,7 +81,7 @@ public class criarConta extends AppCompatActivity {
                                     Toast toast = Toast.makeText(getApplicationContext(), "Não foi possivel criar a conta", Toast.LENGTH_LONG);
                                     toast.show();
                                 }else{
-                                    Intent i = new Intent(criarConta.this, MainActivity.class);
+                                    Intent i = new Intent(criarConta.this, telaLogin.class);
                                     startActivity(i);
                                 }
                             }

@@ -45,7 +45,7 @@ public class telaLogin extends AppCompatActivity {
             firebaseAuth.signInWithEmailAndPassword(login, senha);
             FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
             if (firebaseUser != null){
-                Intent i = new Intent(this, telaPrincipal.class);
+                Intent i = new Intent(this, telaPrincipal2.class);
                 startActivity(i);
             } else{
                 Toast toast = Toast.makeText(getApplicationContext(), "Login ou Senha Incorreto(s)", Toast.LENGTH_LONG);
