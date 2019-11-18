@@ -3,9 +3,6 @@ package com.example.daniel.pi;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
 import android.view.View;
 
 import com.google.android.material.navigation.NavigationView;
@@ -32,7 +29,6 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class telaPrincipal1 extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -83,7 +79,7 @@ public class telaPrincipal1 extends AppCompatActivity
                     listaArtigo.add(artigo);
                 }
 
-                artigoAdapter adapter = new artigoAdapter(
+                ArtigoAdapter adapter = new ArtigoAdapter(
                         getApplicationContext(), R.layout.list_item_artigo,listaArtigo
                 );
 

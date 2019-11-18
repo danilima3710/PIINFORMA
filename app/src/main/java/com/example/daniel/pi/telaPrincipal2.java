@@ -85,12 +85,13 @@ public class telaPrincipal2 extends AppCompatActivity
                     listaArtigo.add(artigo);
                 }
 
-//                artigoAdapter adapter = new artigoAdapter(
+//                ArtigoAdapter adapter = new ArtigoAdapter(
 //                        getApplicationContext(), R.layout.list_item_artigo,listaArtigo
 //                );
 
-                listaAdapterPessoa = new ArrayAdapter<Artigo>(telaPrincipal2.this, android.R.layout.simple_list_item_1, listaArtigo);
-                listView.setAdapter(listaAdapterPessoa);
+                //listaAdapterPessoa = new ArrayAdapter<Artigo>(telaPrincipal2.this, android.R.layout.simple_list_item_1, listaArtigo);
+                ArtigoAdapter listaAdpaterArtigo = new ArtigoAdapter ( getApplicationContext(), R.layout.template_item_lista_artigo , listaArtigo);
+                listView.setAdapter(listaAdpaterArtigo);
             }
 
 
