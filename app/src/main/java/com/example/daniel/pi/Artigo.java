@@ -9,6 +9,16 @@ public class Artigo {
     String categoria;
     String publico;
     String tipoArtigo;
+    String resumo;
+
+    public String getResumo() {
+        return resumo;
+    }
+
+    public void setResumo(String resumo) {
+        this.resumo = resumo;
+    }
+
     String url;
 
     public String getId_artigo() {

@@ -62,12 +62,12 @@ public class ArtigoCadastrarActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         inicializaDataBase();
 
-        dialog = new SpotsDialog.Builder().setContext(this).build();
-        btn_upload = (Button) findViewById(R.id.button2);
-
-        btn_cadastrar = (Button) findViewById(R.id.button);
+//        dialog = new SpotsDialog.Builder().setContext(this).build();
+//        btn_upload = (Button) findViewById(R.id.button2);
+//
+//        btn_cadastrar = (Button) findViewById(R.id.button);
 //        findViewById(R.id.button).setEnabled(false);
-        findViewById(R.id.button).setEnabled(true);
+//        findViewById(R.id.button).setEnabled(true);
     }
 
     private void inicializaDataBase() {
@@ -86,6 +86,7 @@ public class ArtigoCadastrarActivity extends AppCompatActivity {
 
         final EditText t = (EditText) findViewById(R.id.titulo);
         final EditText d = (EditText) findViewById(R.id.descricao);
+        final EditText r = (EditText) findViewById(R.id.resumo);
         final RadioButton estagio = (RadioButton) findViewById(R.id.estagio);
         final RadioButton bolsa = (RadioButton) findViewById(R.id.bolsa);
         final RadioButton palestra = (RadioButton) findViewById(R.id.palestra);
@@ -101,6 +102,7 @@ public class ArtigoCadastrarActivity extends AppCompatActivity {
         artigo.setId_artigo(UUID.randomUUID().toString());
         artigo.setTitulo(t.getText().toString());
         artigo.setDescricao(d.getText().toString());
+        artigo.setResumo(r.getText().toString());
 
         if (estagio.isChecked() == true) {
             artigo.setCategoria("Estagio");
@@ -153,14 +155,13 @@ public class ArtigoCadastrarActivity extends AppCompatActivity {
         startActivity(i);
     }
 
-    public void upload(View view) {
-        findViewById(R.id.button).setEnabled(true);
-        Intent i = new Intent();
-        i.setType("image/*");
-        i.setAction(i.ACTION_GET_CONTENT);
-        startActivityForResult(i, PICK_IMAGE_REQUEST);
-
-    }
+//    public void upload(View view) {
+//        findViewById(R.id.button).setEnabled(true);
+//        Intent i = new Intent();
+//        i.setType("image/*");
+//        i.setAction(i.ACTION_GET_CONTENT);
+//        startActivityForResult(i, PICK_IMAGE_REQUEST);
+//    }
 
 
     protected void onActivityResult(int requestCode, int resultCode, final Intent data) {

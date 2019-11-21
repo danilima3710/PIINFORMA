@@ -1,5 +1,6 @@
 package com.example.daniel.pi;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -13,61 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 public class itemSelecionado extends AppCompatActivity {
-    String titulo;
-    String descricao;
-    String url;
-    String id;
 
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
-    }
-
-    public String getPublico() {
-        return publico;
-    }
-
-    public void setPublico(String publico) {
-        this.publico = publico;
-    }
-
-    String categoria;
-    String publico;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,11 +23,25 @@ public class itemSelecionado extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        EditText wTitulo = (EditText) findViewById(R.id.titulo);
-        EditText wDescricao = (EditText) findViewById(R.id.descricao);
+        Intent i = getIntent();
+        String titulo = (String) i.getSerializableExtra("titulo");
+        String descricao = (String) i.getSerializableExtra("descricao");
+        String categoria = (String) i.getSerializableExtra("categoria");
+        String tipoArtigo = (String) i.getSerializableExtra("tipoArtigo");
+        String publico = (String) i.getSerializableExtra("publico");
+
+        TextView wTitulo = (TextView) findViewById(R.id.titulo);
+        TextView wDescricao = (TextView) findViewById(R.id.descricao);
         TextView wCategoria = (TextView) findViewById(R.id.categoria);
+        TextView wArtigo = (TextView) findViewById(R.id.tipoArtigo);
+        TextView wPublico = (TextView) findViewById(R.id.publicoAlvo);
+
 
         wTitulo.setText(titulo);
+        wDescricao.setText(descricao);
+        wCategoria.setText(categoria);
+        wArtigo.setText(tipoArtigo);
+        wPublico.setText(publico);
         wDescricao.setText(descricao);
         wCategoria.setText(categoria);
     }

@@ -16,10 +16,6 @@
             android:label="@string/title_activity_tela_principal2"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".telaPrincipal1"
-            android:label="@string/title_activity_tela_principal1"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".itemSelecionado"
             android:label="@string/title_activity_item_selecionado"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -31,10 +27,6 @@
         <activity
             android:name=".ArtigoCadastrarActivity"
             android:label="@string/title_activity_cadastrar"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".telaPrincipal"
-            android:label="@string/title_activity_tela_principal"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".telaLogin">
             <intent-filter>

@@ -39,8 +39,6 @@ public class telaLogin extends AppCompatActivity {
         final EditText l = (EditText) findViewById(R.id.login);
         final EditText s = (EditText) findViewById(R.id.senha);
         //remover código
-        l.setText("romulo.beninca@ifsc.edu.br");
-        s.setText("abelha123");
         login = l.getText().toString();
         senha = s.getText().toString();
 

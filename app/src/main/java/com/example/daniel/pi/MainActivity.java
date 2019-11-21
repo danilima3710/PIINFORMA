@@ -48,8 +48,8 @@ public class MainActivity extends AppCompatActivity {
             firebaseAuth.signInWithEmailAndPassword(login, senha);
             FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
             if (firebaseUser != null){
-                Intent i = new Intent(this, telaPrincipal.class);
-                startActivity(i);
+//                Intent i = new Intent(this, telaPrincipal.class);
+//                startActivity(i);
             } else{
                 Toast toast = Toast.makeText(getApplicationContext(), "Login ou Senha Incorreto(s)", Toast.LENGTH_LONG);
                 toast.show();

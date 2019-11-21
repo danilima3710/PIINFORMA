@@ -26,6 +26,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -92,6 +93,24 @@ public class telaPrincipal2 extends AppCompatActivity
                 //listaAdapterPessoa = new ArrayAdapter<Artigo>(telaPrincipal2.this, android.R.layout.simple_list_item_1, listaArtigo);
                 ArtigoAdapter listaAdpaterArtigo = new ArtigoAdapter ( getApplicationContext(), R.layout.template_item_lista_artigo , listaArtigo);
                 listView.setAdapter(listaAdpaterArtigo);
+
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Intent i = new Intent(telaPrincipal2.this, itemSelecionado.class);
+                        i.putExtra("titulo", listaArtigo.get(position).getTitulo());
+                        i.putExtra("descricao", listaArtigo.get(position).getDescricao());
+                        i.putExtra("categoria", listaArtigo.get(position).getCategoria());
+                        i.putExtra("tipoArtigo", listaArtigo.get(position).getTipoArtigo());
+                        i.putExtra("publico", listaArtigo.get(position).getPublico());
+
+                        startActivity(i);
+                    }
+
+                }
+                );
+
+
             }
 
 
