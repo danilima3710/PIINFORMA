@@ -52,10 +52,11 @@ public class TelaUsuario extends AppCompatActivity {
 
                 Intent i = new Intent(TelaUsuario.this, itemSelecionado.class);
                 i.putExtra("titulo", listaArtigo.get(position).getTitulo());
-                i.putExtra("desc", listaArtigo.get(position).getDescricao());
+                i.putExtra("descricao", listaArtigo.get(position).getDescricao());
+                i.putExtra("categoria", listaArtigo.get(position).getCategoria());
                 i.putExtra("tipoArtigo", listaArtigo.get(position).getTipoArtigo());
-                i.putExtra("cat", listaArtigo.get(position).getCategoria());
                 i.putExtra("publico", listaArtigo.get(position).getPublico());
+
                 startActivity(i);
             }
         });

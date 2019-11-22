@@ -151,7 +151,7 @@ public class ArtigoCadastrarActivity extends AppCompatActivity {
         Toast toast = Toast.makeText(getApplicationContext(), "Artigo cadastrado com sucesso!!!", Toast.LENGTH_LONG);
         toast.show();
 
-        Intent i = new Intent(this, ArtigoCadastrarActivity.class);
+        Intent i = new Intent(this, telaPrincipal2.class);
         startActivity(i);
     }
 

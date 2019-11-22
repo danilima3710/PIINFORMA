@@ -211,6 +211,7 @@
         android:onClick="cad"
         android:text="Cadastrar"
         android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -223,8 +224,8 @@
         android:layout_marginEnd="9dp"
         android:layout_marginBottom="45dp"
         android:ems="10"
+        android:hint="Resumo"
         android:inputType="textPersonName"
-        android:text="Resumo"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="@+id/descricao"
         app:layout_constraintEnd_toEndOf="parent"

@@ -42,32 +42,38 @@ public class telaLogin extends AppCompatActivity {
         login = l.getText().toString();
         senha = s.getText().toString();
 
-        if (!login.isEmpty() && !senha.isEmpty()){
-            firebaseAuth.signInWithEmailAndPassword(login, senha);
-            FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-            if (firebaseUser != null){
-                Intent i = new Intent(this, telaPrincipal2.class);
-                startActivity(i);
-            } else{
-                Toast toast = Toast.makeText(getApplicationContext(), "Login ou Senha Incorreto(s)", Toast.LENGTH_LONG);
-                toast.show();
-            }
-        }else {
-            if (login.isEmpty() && !senha.isEmpty()){
-                Toast toast = Toast.makeText(getApplicationContext(), "Login está vazio", Toast.LENGTH_LONG);
-                toast.show();
-            }else{
-                if (!login.isEmpty() && senha.isEmpty()){
-                    Toast toast = Toast.makeText(getApplicationContext(), "Senha está vazia", Toast.LENGTH_LONG);
+        if (login.equals("admin") && (senha.equals("admin"))){
+            Intent i = new Intent(this, telaPrincipal2.class);
+            startActivity(i);
+        }else{
+            if (!login.isEmpty() && !senha.isEmpty()){
+                firebaseAuth.signInWithEmailAndPassword(login, senha);
+                FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+                if (firebaseUser != null){
+                    Intent i = new Intent(this, TelaUsuario.class);
+                    startActivity(i);
+                } else{
+                    Toast toast = Toast.makeText(getApplicationContext(), "Login ou Senha Incorreto(s)", Toast.LENGTH_LONG);
+                    toast.show();
+                }
+            }else {
+                if (login.isEmpty() && !senha.isEmpty()){
+                    Toast toast = Toast.makeText(getApplicationContext(), "Login está vazio", Toast.LENGTH_LONG);
                     toast.show();
                 }else{
-                    if (login.isEmpty() && senha.isEmpty()){
-                        Toast toast = Toast.makeText(getApplicationContext(), "Favor inserir o login e a senha", Toast.LENGTH_LONG);
+                    if (!login.isEmpty() && senha.isEmpty()){
+                        Toast toast = Toast.makeText(getApplicationContext(), "Senha está vazia", Toast.LENGTH_LONG);
                         toast.show();
+                    }else{
+                        if (login.isEmpty() && senha.isEmpty()){
+                            Toast toast = Toast.makeText(getApplicationContext(), "Favor inserir o login e a senha", Toast.LENGTH_LONG);
+                            toast.show();
+                        }
                     }
                 }
             }
         }
+
     }
 
     public void criarConta(View view) {

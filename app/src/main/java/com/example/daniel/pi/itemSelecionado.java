@@ -34,7 +34,7 @@ public class itemSelecionado extends AppCompatActivity {
         TextView wDescricao = (TextView) findViewById(R.id.descricao);
         TextView wCategoria = (TextView) findViewById(R.id.categoria);
         TextView wArtigo = (TextView) findViewById(R.id.tipoArtigo);
-        TextView wPublico = (TextView) findViewById(R.id.publicoAlvo);
+        TextView wPublico = (TextView) findViewById(R.id.publico);
 
 
         wTitulo.setText(titulo);
