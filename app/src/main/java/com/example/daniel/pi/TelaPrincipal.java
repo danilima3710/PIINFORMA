@@ -31,7 +31,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class telaPrincipal2 extends AppCompatActivity
+public class TelaPrincipal extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     FirebaseDatabase firebaseDatabase;
@@ -101,7 +101,7 @@ public class telaPrincipal2 extends AppCompatActivity
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Intent i = new Intent(telaPrincipal2.this, itemSelecionado.class);
+                        Intent i = new Intent(TelaPrincipal.this, itemSelecionado.class);
                         i.putExtra("titulo", listaArtigo.get(position).getTitulo());
                         i.putExtra("descricao", listaArtigo.get(position).getDescricao());
                         i.putExtra("categoria", listaArtigo.get(position).getCategoria());
@@ -128,7 +128,7 @@ public class telaPrincipal2 extends AppCompatActivity
     }
 
     private void iniciaFireBase() {
-        FirebaseApp.initializeApp(telaPrincipal2.this);
+        FirebaseApp.initializeApp(TelaPrincipal.this);
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
         firebaseAuth = FirebaseAuth.getInstance();

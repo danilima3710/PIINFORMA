@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/fundo7"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".telaPrincipal2"
+    tools:context=".TelaPrincipal"
     tools:showIn="@layout/app_bar_tela_principal2">
 
     <ListView

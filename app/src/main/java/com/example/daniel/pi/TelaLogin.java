@@ -28,6 +28,7 @@ public class TelaLogin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tela_login);
         firebaseAuth = FirebaseAuth.getInstance();
+
         Button btnEntrar = findViewById(R.id.entrar);
         btnEntrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,12 +37,7 @@ public class TelaLogin extends AppCompatActivity {
             }
         });
 
-
-
        // firebaseAuth.createUserWithEmailAndPassword("teste@teste.com", "1234mudar");
-
-
-
         database = FirebaseDatabase.getInstance();
         databaseReference = database.getReference();
     }
@@ -49,20 +45,23 @@ public class TelaLogin extends AppCompatActivity {
     public void entrar(View view) {
         final EditText l = (EditText) findViewById(R.id.login);
         final EditText s = (EditText) findViewById(R.id.senha);
+
+//        l.setText( "rbeninca@gmail.com");
+//        l.setText( "123mudar");
+
         login = l.getText().toString();
         senha = s.getText().toString();
-        login = "rbeninca@gmail.com";
-        senha = "123mudar";
+
 
         if (login.equals("admin") && (senha.equals("admin")) ){
-            Intent i = new Intent(getApplicationContext(), telaPrincipal2.class);
+            Intent i = new Intent(getApplicationContext(), TelaPrincipal.class);
             startActivity(i);
         }else{
             if (!login.isEmpty() && !senha.isEmpty()){
                 firebaseAuth.signInWithEmailAndPassword(login, senha);
                 FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
                 if (firebaseUser != null){
-                    Intent i = new Intent(getApplicationContext(), TelaUsuario2.class);
+                    Intent i = new Intent(getApplicationContext(), TelaUsuario.class);
                     startActivity(i);
                 } else{
                     Toast toast = Toast.makeText(getApplicationContext(), "Login ou Senha Incorreto(s)", Toast.LENGTH_LONG);
@@ -89,7 +88,7 @@ public class TelaLogin extends AppCompatActivity {
     }
 
     public void criarConta(View view) {
-        Intent i = new Intent(this, criarConta.class);
+        Intent i = new Intent(this, CriarConta.class);
         startActivity(i);
     }
 }

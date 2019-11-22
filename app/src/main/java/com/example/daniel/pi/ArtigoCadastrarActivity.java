@@ -8,15 +8,10 @@ import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import dmax.dialog.SpotsDialog;
 
 import android.util.Log;
 import android.view.View;
@@ -31,10 +26,8 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.squareup.picasso.Picasso;
 
 import java.util.UUID;
 
@@ -151,7 +144,7 @@ public class ArtigoCadastrarActivity extends AppCompatActivity {
         Toast toast = Toast.makeText(getApplicationContext(), "Artigo cadastrado com sucesso!!!", Toast.LENGTH_LONG);
         toast.show();
 
-        Intent i = new Intent(this, telaPrincipal2.class);
+        Intent i = new Intent(this, TelaPrincipal.class);
         startActivity(i);
     }
 

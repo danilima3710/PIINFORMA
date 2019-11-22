@@ -18,7 +18,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class criarConta extends AppCompatActivity {
+public class CriarConta extends AppCompatActivity {
     Conta conta = new Conta();
     DatabaseReference databaseReference;
     FirebaseDatabase database;
@@ -62,14 +62,14 @@ public class criarConta extends AppCompatActivity {
                 }else{
                     //Verifica se não tem algum campo vazio
                     if (!sen.isEmpty() && !sen2.isEmpty() && !log.isEmpty()){
-                        firebaseAuth.createUserWithEmailAndPassword(log, sen).addOnCompleteListener(criarConta.this, new OnCompleteListener<AuthResult>() {
+                        firebaseAuth.createUserWithEmailAndPassword(log, sen).addOnCompleteListener(CriarConta.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (!task.isSuccessful()){
                                     Toast toast = Toast.makeText(getApplicationContext(), "Não foi possivel criar a conta", Toast.LENGTH_LONG);
                                     toast.show();
                                 }else{
-                                    Intent i = new Intent(criarConta.this, TelaLogin.class);
+                                    Intent i = new Intent(CriarConta.this, TelaLogin.class);
                                     startActivity(i);
                                 }
                             }

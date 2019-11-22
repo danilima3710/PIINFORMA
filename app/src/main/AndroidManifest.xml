@@ -10,10 +10,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".TelaUsuario2"></activity>
-        <activity android:name=".artigosAdapter" />
+        <activity android:name=".TelaUsuario"></activity>
         <activity
-            android:name=".telaPrincipal2"
+            android:name=".TelaPrincipal"
             android:label="@string/title_activity_tela_principal2"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -21,7 +20,7 @@
             android:label="@string/title_activity_item_selecionado"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".criarConta"
+            android:name=".CriarConta"
             android:label="@string/title_activity_criar_conta"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
