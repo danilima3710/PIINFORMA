@@ -19,7 +19,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class TelaUsuario extends AppCompatActivity {
+public class TelaUsuario2 extends AppCompatActivity {
     FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
     FirebaseAuth firebaseAuth;
@@ -28,27 +28,24 @@ public class TelaUsuario extends AppCompatActivity {
     private ArrayList<Artigo> listaArtigo = new ArrayList<Artigo>();
     private ArrayAdapter<Artigo> listaAdapterPessoa;
     private DataSnapshot artigosSnapshot;
-    //String artigos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tela_usuario);
+        setContentView(R.layout.activity_tela_usuario2);
 
         firebaseDatabase = FirebaseDatabase.getInstance();
-//    databaseReference = firebaseDatabase.getReference("Artigos/"+ artigos);
-        databaseReference = firebaseDatabase.getReference("Artigos/");
+        databaseReference = firebaseDatabase.getReference();
         firebaseAuth = FirebaseAuth.getInstance();
 
         eventoDataBase();
 
-        listView1= findViewById(R.id.listView1);
+        listView1= findViewById(R.id.listaViewArtigos);
 
         listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                Intent i = new Intent(TelaUsuario.this, itemSelecionado.class);
+                Intent i = new Intent(TelaUsuario2.this, itemSelecionado.class);
                 i.putExtra("titulo", listaArtigo.get(position).getTitulo());
                 i.putExtra("descricao", listaArtigo.get(position).getDescricao());
                 i.putExtra("categoria", listaArtigo.get(position).getCategoria());
@@ -59,33 +56,34 @@ public class TelaUsuario extends AppCompatActivity {
             }
         });
 
-//        databaseReference.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                artigosSnapshot = dataSnapshot;
-//                listar();
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//                Toast.makeText(TelaUsuario.this, "Erro ao listar", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-
     }
 
-    private void eventoDataBase(){
+    private void eventoDataBase() {
         databaseReference.child("Artigo").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 listaArtigo.clear();
-
-                for (DataSnapshot postSnapshot:dataSnapshot.getChildren()){
-                    Artigo artigo = postSnapshot.getValue(Artigo.class);
+                for (DataSnapshot objSnapshot:dataSnapshot.getChildren()){
+                    Artigo artigo = objSnapshot.getValue(Artigo.class);
                     listaArtigo.add(artigo);
                 }
-                ArtigoAdapter listaAdpaterArtigo = new ArtigoAdapter ( getApplicationContext(), R.layout.template_item_lista_artigo , listaArtigo);
-                listView1.setAdapter(listaAdpaterArtigo);
+
+                ArtigoAdapter listaArtigoAdapter = new
+                        ArtigoAdapter(getBaseContext(), R.layout.template_item_lista_artigo, listaArtigo);
+                listView1.setAdapter(listaArtigoAdapter);
+
+                listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Intent i = new Intent(TelaUsuario2.this, itemSelecionado.class);
+                        i.putExtra("titulo", listaArtigo.get(position).getTitulo());
+                        i.putExtra("descricao", listaArtigo.get(position).getDescricao());
+                        i.putExtra("categoria", listaArtigo.get(position).getCategoria());
+                        i.putExtra("tipoArtigo", listaArtigo.get(position).getTipoArtigo());
+                        i.putExtra("publico", listaArtigo.get(position).getPublico());
+                        startActivity(i);
+                    }
+                });
             }
 
             @Override
@@ -93,28 +91,11 @@ public class TelaUsuario extends AppCompatActivity {
 
             }
         });
-
     }
 
-    public void deslogar(View view) {
+    public void sair(View view) {
         firebaseAuth.signOut();
         Intent i = new Intent(this, TelaLogin.class);
         startActivity(i);
     }
-
-//
-//    public void listar(){
-//        if (artigosSnapshot== null) return;
-//        listaArtigo.clear();
-//
-//        for (DataSnapshot postSnapshot : artigosSnapshot.getChildren()){
-//
-//            Artigo artigo = artigosSnapshot.getValue(Artigo.class);
-//
-//            listaArtigo.add(artigo);
-//        }
-//        ArtigoAdapter lancamentoAdapter = new ArtigoAdapter(this, listaArtigo);
-//
-//        listView1.setAdapter(lancamentoAdapter);
-//    }
 }

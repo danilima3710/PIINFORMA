@@ -10,7 +10,7 @@
     tools:showIn="@layout/app_bar_tela_principal2">
 
     <ListView
-        android:id="@+id/listView"
+        android:id="@+id/listView1"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"

@@ -3,9 +3,6 @@ package com.example.daniel.pi;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
 import android.view.View;
 
 import com.google.android.material.navigation.NavigationView;
@@ -73,10 +70,22 @@ public class telaPrincipal2 extends AppCompatActivity
 
         iniciaFireBase();
         eventoDataBase();
+
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                Artigo artigo = listaArtigo.get(position);
+
+                databaseReference.child("Artigo").child(artigo.getId_artigo()).removeValue();
+                Toast toast = Toast.makeText(getApplicationContext(), "Artigo removido com sucesso", Toast.LENGTH_LONG);
+                toast.show();
+                return true;
+            }
+        });
     }
 
     private void eventoDataBase() {
-        this.listView= findViewById(R.id.listView);
+        this.listView= findViewById(R.id.listView1);
         databaseReference.child("Artigo").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -86,11 +95,6 @@ public class telaPrincipal2 extends AppCompatActivity
                     listaArtigo.add(artigo);
                 }
 
-//                ArtigoAdapter adapter = new ArtigoAdapter(
-//                        getApplicationContext(), R.layout.list_item_artigo,listaArtigo
-//                );
-
-                //listaAdapterPessoa = new ArrayAdapter<Artigo>(telaPrincipal2.this, android.R.layout.simple_list_item_1, listaArtigo);
                 ArtigoAdapter listaAdpaterArtigo = new ArtigoAdapter ( getApplicationContext(), R.layout.template_item_lista_artigo , listaArtigo);
                 listView.setAdapter(listaAdpaterArtigo);
 
@@ -194,7 +198,7 @@ public class telaPrincipal2 extends AppCompatActivity
 
     public void sair(MenuItem item) {
         firebaseAuth.signOut();
-        Intent i = new Intent(this, telaLogin.class);
+        Intent i = new Intent(this, TelaLogin.class);
         startActivity(i);
     }
 }
