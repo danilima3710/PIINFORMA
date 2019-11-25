@@ -8,6 +8,7 @@
         android:id="@+id/listView1"
         android:layout_width="wrap_content"
         android:layout_height="578dp"
+        android:background="@drawable/fundo7"
         />
 
     <Button

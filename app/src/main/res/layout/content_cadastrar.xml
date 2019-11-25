@@ -227,6 +227,7 @@
         android:hint="Resumo"
         android:inputType="textPersonName"
         android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="@+id/descricao"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/titulo"
